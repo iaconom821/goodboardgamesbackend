@@ -1,5 +1,6 @@
 class BoardgamesController < ApplicationController
-  before_action :set_boardgame, only: %i[ show update destroy ]
+  before_action :authorized, only: [:create, :update, :destroy]
+  before_action :set_boardgame, only: [ :show :update :destroy ]
 
   # GET /boardgames
   # GET /boardgames.json
