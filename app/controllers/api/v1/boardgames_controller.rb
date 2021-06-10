@@ -20,8 +20,9 @@ class Api::V1::BoardgamesController < ApplicationController
   def create
     @boardgame = Boardgame.new(boardgame_params)
 
-    if @boardgame.save
-      render :show, status: :created
+    if @boardgame.valid?
+      @boardgame.save 
+      render json: @boardgame, status: :created
     else
       render json: @boardgame.errors, status: :unprocessable_entity
     end
@@ -40,6 +41,8 @@ class Api::V1::BoardgamesController < ApplicationController
   # DELETE /boardgames/1
   # DELETE /boardgames/1.json
   def destroy
+    @boardgame.reviews.destroy_all
+    @boardgame.gameowners.destroy_all
     @boardgame.destroy
   end
 

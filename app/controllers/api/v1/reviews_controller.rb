@@ -18,8 +18,10 @@ class Api::V1::ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
 
-    if @review.save
-      render :show, status: :created, location: @review
+    if @review.valid?
+      @review.save 
+      @boardgame = Boardgame.find(params[:boardgame_id])
+      render json: @boardgame, status: :created 
     else
       render json: @review.errors, status: :unprocessable_entity
     end
@@ -29,7 +31,8 @@ class Api::V1::ReviewsController < ApplicationController
   # PATCH/PUT /reviews/1.json
   def update
     if @review.update(review_params)
-      render :show, status: :ok, location: @review
+      @boardgame = Boardgame.find(params[:boardgame_id])
+      render json: @boardgame, status: :ok
     else
       render json: @review.errors, status: :unprocessable_entity
     end
@@ -38,7 +41,9 @@ class Api::V1::ReviewsController < ApplicationController
   # DELETE /reviews/1
   # DELETE /reviews/1.json
   def destroy
-    @review.destroy
+    @del_review = @review.destroy
+    @boardgame = Boardgame.find(@del_review.boardgame_id)
+    render json: @boardgame 
   end
 
   private
@@ -49,6 +54,6 @@ class Api::V1::ReviewsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def review_params
-      params.require(:review).permit(:title, :description, :overall_rating, :replayability, :first_time_difficulty, :user, :boardgame)
+      params.require(:review).permit(:title, :description, :overall_rating, :replayability, :first_time_difficulty, :user_id, :boardgame_id)
     end
 end

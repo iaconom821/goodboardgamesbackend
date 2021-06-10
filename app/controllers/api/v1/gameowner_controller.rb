@@ -1,4 +1,4 @@
-class Api::V1::BoardgamesController < ApplicationController
+class Api::V1::GameownerController < ApplicationController
     before_action :authorized, only: [:create, :destroy]
 
     def create
