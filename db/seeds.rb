@@ -14,7 +14,9 @@ Boardgame.all.destroy_all
 
 user = User.create(name: "Mike", username: "Mike", email: "iaconom821@gmail.com", password: "Mike", profile_picture: "https://avatars.githubusercontent.com/u/77515394?v=4" )
 
-bg1 = Boardgame.create(title: "Taboo", manufacturer: "Hasbro", description: "Family fun, don't say the words on the card!")
+bg1 = Boardgame.create(title: "Taboo", manufacturer: "Hasbro", description: "Family fun, don't say the words on the card!", upc_code: "653569586876")
+
+bg2 = Boardgame.create(title: "Visitor in Blackwood Grove", manufacturer: "Resonym", description: "A spacecraft crashes in Blackwood Grove, protected by a powerful forcefield. Why can some objects pass through the forcefield, but others are repelled?", upc_code: "608938948106")
 
 r1 = Review.create(title: "Super Fast", description: "wow that was a bit too fast for my liking", overall_rating: 5, replayability: 7, first_time_difficulty: 3, user_id: User.all.sample.id, boardgame_id: Boardgame.all.sample.id)
 

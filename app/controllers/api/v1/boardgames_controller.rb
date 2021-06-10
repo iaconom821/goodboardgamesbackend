@@ -21,7 +21,7 @@ class Api::V1::BoardgamesController < ApplicationController
     @boardgame = Boardgame.new(boardgame_params)
 
     if @boardgame.save
-      render :show, status: :created, location: @boardgame
+      render :show, status: :created
     else
       render json: @boardgame.errors, status: :unprocessable_entity
     end
@@ -51,6 +51,6 @@ class Api::V1::BoardgamesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def boardgame_params
-      params.require(:boardgame).permit(:title, :manufacturer, :description)
+      params.require(:boardgame).permit(:title, :manufacturer, :description, :upc_code)
     end
 end
