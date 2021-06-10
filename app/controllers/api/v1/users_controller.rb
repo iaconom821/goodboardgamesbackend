@@ -1,11 +1,12 @@
-class UsersController < ApplicationController
-
-  before_action :set_user, only: [ :show :update :destroy ]
+class Api::V1::UsersController < ApplicationController
+  skip_before_action :authorized, only: [:login, :create]
+  before_action :set_user, only: [ :show, :update, :destroy ]
 
   # GET /users
   # GET /users.json
   def index
     @users = User.all
+    render json: @users 
   end
 
   # GET /users/1
@@ -16,7 +17,9 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
+    new_hash = user_params
+    new_hash[:password] = params[:password]
+    @user = User.new(new_hash)
     if @user.valid?
       @user.save
       token = encode_token({user_id: @user.id})
@@ -36,10 +39,6 @@ class UsersController < ApplicationController
     else
       render json: {error: "Invalid username or password"}
     end
-  end
-
-  def auto_login
-    render json: @user
   end
 
   # PATCH/PUT /users/1

@@ -1,6 +1,6 @@
-class ReviewsController < ApplicationController
+class Api::V1::ReviewsController < ApplicationController
   before_action :authorized, only: [:create, :update, :destroy]
-  before_action :set_review, only: [ :show :update :destroy ]
+  before_action :set_review, only: [ :show, :update, :destroy ]
 
   # GET /reviews
   # GET /reviews.json

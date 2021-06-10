@@ -1,16 +1,18 @@
-class BoardgamesController < ApplicationController
+class Api::V1::BoardgamesController < ApplicationController
   before_action :authorized, only: [:create, :update, :destroy]
-  before_action :set_boardgame, only: [ :show :update :destroy ]
+  before_action :set_boardgame, only: [ :show, :update, :destroy ]
 
   # GET /boardgames
   # GET /boardgames.json
   def index
     @boardgames = Boardgame.all
+    render json: @boardgames 
   end
 
   # GET /boardgames/1
   # GET /boardgames/1.json
   def show
+    render json: @boardgame
   end
 
   # POST /boardgames
