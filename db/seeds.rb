@@ -21,6 +21,7 @@ bg2 = Boardgame.create(title: "Visitor in Blackwood Grove", manufacturer: "Reson
 r1 = Review.create(title: "Super Fast", description: "wow that was a bit too fast for my liking", overall_rating: 5, replayability: 7, first_time_difficulty: 3, user_id: User.all.sample.id, boardgame_id: Boardgame.all.sample.id)
 
 go1 = Gameowner.create(user_id: User.all.sample.id, boardgame_id: Boardgame.all.sample.id)
+go2 = Gameowner.create(user_id: User.all.sample.id, boardgame_id: Boardgame.all.sample.id)
 
 
 

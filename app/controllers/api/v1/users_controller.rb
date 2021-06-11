@@ -1,6 +1,7 @@
 class Api::V1::UsersController < ApplicationController
   skip_before_action :authorized, only: [:login, :create]
   before_action :set_user, only: [ :show, :update, :destroy ]
+  
 
   # GET /users
   # GET /users.json
@@ -12,6 +13,7 @@ class Api::V1::UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    render json: @user
   end
 
   # POST /users
@@ -23,7 +25,7 @@ class Api::V1::UsersController < ApplicationController
     if @user.valid?
       @user.save
       token = encode_token({user_id: @user.id})
-      render json: {user: @user, token: token}
+      render json: {user: @user, token: token}, methods: :owned_games
     else
       render json: {error: "Invalid username or password"}
     end
@@ -35,7 +37,7 @@ class Api::V1::UsersController < ApplicationController
 
     if @user && @user.authenticate(params[:password])
       token = encode_token({user_id: @user.id})
-      render json: {user: @user, token: token}
+      render json: {user: @user, token: token}, methods: :owned_games
     else
       render json: {error: "Invalid username or password"}
     end
