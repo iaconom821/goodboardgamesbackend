@@ -46,6 +46,27 @@ class Api::V1::BoardgamesController < ApplicationController
     @boardgame.destroy
   end
 
+  # POST /scanned_game
+
+  def scanned_game
+    
+    @response = HTTParty.get(
+      "https://api.upcitemdb.com/prod/trial/lookup?upc=#{boardgame_params[:upc_code]}"
+    )
+
+    @scanned_boardgame = Boardgame.new(title: @response["items"][0]["title"], description: @response["items"][0]["description"], manufacturer: @response["items"][0]["brand"], upc_code: boardgame_params[:upc_code], image: @response["items"][0]["images"][0])
+
+    # Boardgame.new(title: @response["items"][0]["title"], description: @response["items"][0]["description"], manufacturer: @response["items"][0]["images"][0])
+    if @scanned_boardgame.valid?
+      @scanned_boardgame.save
+
+      render json: @scanned_boardgame
+    else
+
+      render json: {message: "Invalid game"}
+    end    
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_boardgame

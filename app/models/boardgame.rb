@@ -4,5 +4,4 @@ class Boardgame < ApplicationRecord
     has_many :owners, through: :gameowners, source: :user
 
     validates :upc_code, uniqueness: true 
-
 end
