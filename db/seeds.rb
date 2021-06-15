@@ -12,9 +12,12 @@ User.all.destroy_all
 Boardgame.all.destroy_all
 
 
-user = User.create(name: "Mike", username: "Mike", email: "iaconom821@gmail.com", password: "Mike", profile_picture: "https://avatars.githubusercontent.com/u/77515394?v=4" )
+user1 = User.create(name: "Mike", username: "Mike", email: "iaconom821@gmail.com", password: "Mike", profile_picture: "https://avatars.githubusercontent.com/u/77515394?v=4" )
 
-user = User.create(name: "Joanna", username: "Joanna", email: "jzappall@gmail.com", password: "Joanna", profile_picture:"https://media-exp1.licdn.com/dms/image/C4E03AQEuOq7VSQrxUw/profile-displayphoto-shrink_200_200/0/1516865513930?e=1629331200&v=beta&t=PzxqUQfhZ3hjjdEsxJBzxzrPQ0D_53uANutxCbM1Pig")
+user2 = User.create(name: "Joanna", username: "Joanna", email: "jzappalla@gmail.com", password: "Joanna", profile_picture:"https://media-exp1.licdn.com/dms/image/C4E03AQEuOq7VSQrxUw/profile-displayphoto-shrink_200_200/0/1516865513930?e=1629331200&v=beta&t=PzxqUQfhZ3hjjdEsxJBzxzrPQ0D_53uANutxCbM1Pig")
+
+user3 = User.create(name: "Rob", username: "Rob" email: "rgiacono6@gmail.com", password: "Rob", profile_picture: "https://media-exp1.licdn.com/dms/image/C4D03AQFqHU91B4HwYg/profile-displayphoto-shrink_400_400/0/1604507920283?e=1629331200&v=beta&t=E7JEp_qLOOqImTSsK84YWW1MS9XyERjFPFngcYH-fD8")
+
 
 bg1 = Boardgame.create(title: "Taboo", manufacturer: "Hasbro", description: "Family fun, don't say the words on the card!", upc_code: "653569586876", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKSM6AK0nmxaTDxlkMqIv55525iVbIsAoGYB56V9FBItAsHxEKYCgsUKby0lUmdpTZtXPRyEYP&usqp=CAc")
 
