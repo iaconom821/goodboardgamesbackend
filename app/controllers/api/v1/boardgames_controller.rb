@@ -40,11 +40,11 @@ class Api::V1::BoardgamesController < ApplicationController
 
   # DELETE /boardgames/1
   # DELETE /boardgames/1.json
-  def destroy
-    @boardgame.reviews.destroy_all
-    @boardgame.gameowners.destroy_all
-    @boardgame.destroy
-  end
+  # def destroy
+  #   @boardgame.reviews.destroy_all
+  #   @boardgame.gameowners.destroy_all
+  #   @boardgame.destroy
+  # end
 
   # POST /scanned_game
 
