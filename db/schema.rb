@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_14_154934) do
+ActiveRecord::Schema.define(version: 2021_06_17_181047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,15 @@ ActiveRecord::Schema.define(version: 2021_06_14_154934) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
+  create_table "sessions", force: :cascade do |t|
+    t.string "date"
+    t.bigint "boardgame_id", null: false
+    t.integer "winner"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["boardgame_id"], name: "index_sessions_on_boardgame_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "username"
@@ -58,8 +67,21 @@ ActiveRecord::Schema.define(version: 2021_06_14_154934) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "usersessions", force: :cascade do |t|
+    t.string "date"
+    t.bigint "session_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["session_id"], name: "index_usersessions_on_session_id"
+    t.index ["user_id"], name: "index_usersessions_on_user_id"
+  end
+
   add_foreign_key "gameowners", "boardgames"
   add_foreign_key "gameowners", "users"
   add_foreign_key "reviews", "boardgames"
   add_foreign_key "reviews", "users"
+  add_foreign_key "sessions", "boardgames"
+  add_foreign_key "usersessions", "sessions"
+  add_foreign_key "usersessions", "users"
 end

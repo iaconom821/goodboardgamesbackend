@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
+
   namespace :api do 
     namespace :v1 do
       resources :reviews
       resources :boardgames
       resources :users
+      resources :sessions
+      resources :usersessions
 
       post "/login", to: "users#login"
       # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
@@ -16,4 +19,5 @@ Rails.application.routes.draw do
   namespace :admin do
     delete "/boardgames/:id", to: "boardgames#destroy"
   end
+  
 end
