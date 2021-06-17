@@ -10,8 +10,9 @@ class Api::V1::SessionsController < ApplicationController
 
   # GET /sessions/1
   def show
-    @user = User.find(@session.winner)
-    render json: { session: @session, winning_user: @user }
+    byebug
+    @user = @session.winner_profile
+    render json: { session: @session, winning_user: @user, players: @session.players }
   end
 
   # POST /sessions
