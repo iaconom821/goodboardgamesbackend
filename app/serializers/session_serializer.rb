@@ -1,4 +1,5 @@
 class SessionSerializer < ActiveModel::Serializer
-  attributes :id, :date
-  has_one :boardgame
+  attributes :id, :date, :players
+  belongs_to :boardgame
+
 end

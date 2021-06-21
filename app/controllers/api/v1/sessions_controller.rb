@@ -1,6 +1,6 @@
 class Api::V1::SessionsController < ApplicationController
   before_action :set_session, only: [:show, :update, :destroy]
-
+  before_action :logged_in?
   # GET /sessions
   def index
     @sessions = Session.all

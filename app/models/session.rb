@@ -5,7 +5,7 @@ class Session < ApplicationRecord
   validates :date, presence: true
 
   def players
-    self.usersessions.map{ |us| us.user }
+      self.usersessions.map{ |us| us.user }
   end
 
   def winner_profile
