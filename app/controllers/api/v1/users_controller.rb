@@ -7,7 +7,7 @@ class Api::V1::UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
-    render json: @users 
+    render json: @users
   end
 
   # GET /users/1
@@ -25,7 +25,7 @@ class Api::V1::UsersController < ApplicationController
     if @user.valid?
       @user.save
       token = encode_token({user_id: @user.id})
-      render json: {user: @user, token: token}, methods: :owned_games
+      render json: {user: @user, token: token, owned_games: @user.owned_games, sessions: @user.sessions, usersessions: @user.usersessions} 
     else
       render json: {error: "Invalid username or password"}
     end
@@ -37,7 +37,7 @@ class Api::V1::UsersController < ApplicationController
 
     if @user && @user.authenticate(params[:password])
       token = encode_token({user_id: @user.id})
-      render json: {user: @user, token: token}, methods: :owned_games
+      render json: {user: @user, token: token, owned_games: @user.owned_games, sessions: @user.sessions, usersessions: @user.usersessions}
     else
       render json: {error: "Invalid username or password"}
     end

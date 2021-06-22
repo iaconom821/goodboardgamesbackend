@@ -11,4 +11,5 @@ class Session < ApplicationRecord
   def winner_profile
     User.find(self.winner)
   end
+
 end
