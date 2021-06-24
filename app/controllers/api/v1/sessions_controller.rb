@@ -16,7 +16,6 @@ class Api::V1::SessionsController < ApplicationController
 
   # POST /sessions
   def create
-    byebug
     @session = Session.new(session_params)
     
     if @session.valid?

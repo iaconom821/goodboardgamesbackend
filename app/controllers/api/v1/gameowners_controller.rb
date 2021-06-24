@@ -7,7 +7,7 @@ class Api::V1::GameownersController < ApplicationController
             @gameowner.save
             @user = User.find(params[:user_id])
             
-            render json: {user: @user}, methods: :owned_games
+            render json: @user
         else
             render json: {message: "You already own this game"}
         end

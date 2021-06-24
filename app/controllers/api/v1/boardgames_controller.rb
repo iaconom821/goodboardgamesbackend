@@ -19,10 +19,12 @@ class Api::V1::BoardgamesController < ApplicationController
   # POST /boardgames.json
   def create
     @boardgame = Boardgame.new(boardgame_params)
-
     if @boardgame.valid?
       @boardgame.save 
       render json: @boardgame, status: :created
+    elsif Boardgame.find_by(upc_code: boardgame_params["upc_code"])
+      boardgame = Boardgame.find_by(upc_code: boardgame_params["upc_code"])
+      render json: boardgame, status: :ok
     else
       render json: @boardgame.errors, status: :unprocessable_entity
     end
@@ -56,11 +58,14 @@ class Api::V1::BoardgamesController < ApplicationController
 
     @scanned_boardgame = Boardgame.new(title: @response["items"][0]["title"], description: @response["items"][0]["description"], manufacturer: @response["items"][0]["brand"], upc_code: boardgame_params[:upc_code], image: @response["items"][0]["images"][0])
 
-    # Boardgame.new(title: @response["items"][0]["title"], description: @response["items"][0]["description"], manufacturer: @response["items"][0]["images"][0])
     if @scanned_boardgame.valid?
       @scanned_boardgame.save
 
-      render json: @scanned_boardgame
+      render json: @scanned_boardgame, status: :ok
+    elsif Boardgame.find_by(upc_code: boardgame_params["upc_code"])
+      boardgame = Boardgame.find_by(upc_code: boardgame_params["upc_code"])
+
+      render json: boardgame, status: :ok
     else
 
       render json: {message: "Invalid game"}
