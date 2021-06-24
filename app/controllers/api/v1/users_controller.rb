@@ -57,10 +57,11 @@ class Api::V1::UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     @user.sessions.each{|session| session.usersessions.destroy_all}
+    session_del_array = @user.sessions.map{|session| Session.find(session.id).destroy.id}
     @user.reviews.destroy_all
     @user.gameowners.destroy_all
     @del_user = @user.destroy
-    render json: @del_user 
+    render json: {user: @del_user, del_sessions: session_del_array} 
   end
 
   private
